@@ -35,11 +35,11 @@ export const routes: Routes = [
   
   { path: 'posts/tags/tag/:tag', component: TagsComponent, data: { name: 'Tag', icon: 'dashboard', tooltip: 'Tag Page', type: 'user' } }, 
   { path: 'user/login', component: LoginComponent, data: { name: 'Login', icon: 'person', tooltip: 'Login Page', type: 'auth' } },
-  { path: 'user/login/linkedin', component: LinkedinComponent, data: { name: 'Linkedin', icon: 'person', tooltip: 'Linkedin Callback Page', type: 'auth' } },
-  { path: 'user/forgot-password', component: ForgotPasswordComponent, data: { name: 'Forgot Password', icon: 'person', tooltip: 'Forgot Password', type: 'user' } }, 
-  { path: 'post/:user/:id/:title', component: PostComponent, data: { name: 'Post', icon: 'menu_book', tooltip: 'Post', type: 'auth' } },
+  { path: 'user/login/linkedin', component: LinkedinComponent, data: { name: 'Linkedin', icon: 'person', tooltip: 'Linkedin Callback Page', type: 'admin' } },
+  { path: 'user/forgot-password', component: ForgotPasswordComponent, data: { name: 'Forgot Password', icon: 'person', tooltip: 'Forgot Password', type: 'admin' } }, 
+  { path: 'post/:user/:id/:title', component: PostComponent, data: { name: 'Post', icon: 'menu_book', tooltip: 'Post', type: 'admin' } },
   { path: 'user/register', component: RegisterComponent, data: { name: 'Register', icon: 'person_add', tooltip: 'Register Page', type: 'auth' } },
-  { path: 'user/register/token/:authToken', component: AuthRegisterComponent, data: { name: 'Register', icon: 'person_add', tooltip: 'Authentication Register Page', type: 'auth' } },
+  { path: 'user/register/token/:authToken', component: AuthRegisterComponent, data: { name: 'Register', icon: 'person_add', tooltip: 'Authentication Register Page', type: 'admin' } },
   
   // User routes
   { path: 'user/profile', component: UserComponent, canActivate: [AuthGuardService], data: { name: 'Profile', icon: 'person', tooltip: 'Profile Page', type: 'user' } },

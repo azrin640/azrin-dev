@@ -56,7 +56,6 @@ import { PostComponent } from './post/post.component';
 import { CommentsComponent } from './comments/comments.component';
 import { SalesPageComponent } from './sales-page/sales-page.component';
 import { WebsiteComponent } from './sales-page/website/website.component';
-import { BannerComponent } from './banner/banner.component';
 import { AboutWhoComponent } from './home/about-who/about-who.component';
 import { AboutWhatComponent } from './home/about-what/about-what.component';
 import { PostsComponent } from './posts/posts.component';
@@ -70,6 +69,7 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
 import { MainLogoComponent } from './logo/main-logo/main-logo.component';
 import { CallbackComponent } from './user/login/callback/callback.component';
 import { LinkedinComponent } from './user/login/linkedin/linkedin.component';
+import { BannerHalfComponent } from './banner/banner-half/banner-half.component';
 
 export function tokenGetter(){
    return localStorage.getItem('access_token');
@@ -117,7 +117,6 @@ export function tokenGetter(){
     CommentsComponent,
     SalesPageComponent,
     WebsiteComponent,
-    BannerComponent,
     AboutWhoComponent,
     AboutWhatComponent,
     PostsComponent,
@@ -130,7 +129,8 @@ export function tokenGetter(){
     ForgotPasswordComponent,
     MainLogoComponent,
     CallbackComponent,
-    LinkedinComponent
+    LinkedinComponent,
+    BannerHalfComponent
   ],
   imports: [
     BrowserModule,

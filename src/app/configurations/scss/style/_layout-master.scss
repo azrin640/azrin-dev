@@ -34,6 +34,13 @@
             min-height: 90vh;
          }
 
+         &-60vh-padding-top{
+            padding-top: 20vh;
+            overflow-y: hidden;
+            width: 100%;
+            min-height: 60vh;
+         }
+
          &-light-bg{
             background-color: $dark-light-bg;
          }
