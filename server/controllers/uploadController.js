@@ -1,25 +1,12 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const BlogCategory = mongoose.model('BlogCategory');
+const enterprises = require('../json/intelligence/msc-data-2017.json');
+const Enterprise = require('../models/Enterprise');
 
-exports.addBlogCategory = async (req, res, next) => {
-    const blogCategory = new BlogCategory({
-        name: req.body.name
-    });
-    const newBlogCategory = await blogCategory.save().catch((error) => {
-        res.json(error);
-    });
-    if(newBlogCategory){
-        res.json(newBlogCategory);
-    }
-};
+exports.uploadJsonFile = async(req, res) => {
 
-exports.getCategories = async (req, res, next) => {
-    const categories = await BlogCategory.find().catch((error) => {
-        res.json(error);
+    Enterprise.insertMany(enterprises, function(error, docs) {
+        if (docs) res.json(docs);
+        else res.json(error);
     });
-
-    if(categories){
-        res.json(categories);
-    }
 }

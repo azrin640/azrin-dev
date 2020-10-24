@@ -7,6 +7,7 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const postController = require('../controllers/postController');
 const imageController = require('../controllers/imageController');
+const uploadController = require('../controllers/uploadController');
 const autoCompleteController = require('../controllers/autoCompleteController');
 
 const pug = require('pug');
@@ -15,39 +16,42 @@ const multer = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 
+router.get('/upload/json-data',
+    catchErrors(uploadController.uploadJsonFile)
+);
 
 //  ** USER **
 
-router.get('/user/linkedin', 
-   catchErrors(userController.authLinkedin)
+router.get('/user/linkedin',
+    catchErrors(userController.authLinkedin)
 );
 
-router.post('/user/linkedin/approved', 
-   catchErrors(userController.approvedLinkedin)
+router.post('/user/linkedin/approved',
+    catchErrors(userController.approvedLinkedin)
 );
 
-router.post('/user/location', 
-   catchErrors(userController.reqLocation)
+router.post('/user/location',
+    catchErrors(userController.reqLocation)
 );
 
-router.post('/user/register', 
-   validateController.reqValidateAuth,
-   catchErrors(userController.register) 
+router.post('/user/register',
+    validateController.reqValidateAuth,
+    catchErrors(userController.register)
 );
 
-router.post('/user/register/authenticate', 
-   validateController.reqValidateToken,
-   catchErrors(userController.authenticateAuthToken)
+router.post('/user/register/authenticate',
+    validateController.reqValidateToken,
+    catchErrors(userController.authenticateAuthToken)
 )
 
-router.post('/user/authenticate', 
+router.post('/user/authenticate',
     validateController.reqValidateAuth,
     catchErrors(userController.authenticate)
 );
 
-router.post('/user/login',    
-   validateController.reqValidateAuth,
-   catchErrors(userController.login)
+router.post('/user/login',
+    validateController.reqValidateAuth,
+    catchErrors(userController.login)
 );
 
 router.post('/user/forgot-password',
@@ -61,56 +65,56 @@ router.post('/user/reset-password',
     catchErrors(userController.resetPassword)
 );
 
-router.post('/user/profile', 
-   validateController.reqValidateUserId,
-   authController.decodeReq,
-   catchErrors(authController.getUser),
-   catchErrors(userController.profileUser)
+router.post('/user/profile',
+    validateController.reqValidateUserId,
+    authController.decodeReq,
+    catchErrors(authController.getUser),
+    catchErrors(userController.profileUser)
 );
 
 router.get('/user/profile',
-   authController.decodeReq,
-   catchErrors(authController.getUserProfile)
+    authController.decodeReq,
+    catchErrors(authController.getUserProfile)
 );
 
-router.post('/user/profile/update', 
-   authController.decodeReq,
-   validateController.reqValidateUpdateProfile,
-   catchErrors(userController.updateProfile)   
+router.post('/user/profile/update',
+    authController.decodeReq,
+    validateController.reqValidateUpdateProfile,
+    catchErrors(userController.updateProfile)
 );
 
 // Autocomplete
 router.post('/user/profile/autocomplete/cities',
-   autoCompleteController.reqCities
+    autoCompleteController.reqCities
 );
 
 router.post('/user/profile/autocomplete/states',
-   autoCompleteController.reqStates
+    autoCompleteController.reqStates
 );
 
 router.post('/user/profile/autocomplete/countries',
-   autoCompleteController.reqCountries
+    autoCompleteController.reqCountries
 );
 
 // Autocomplete Cities/States/Countries from city
 router.post('/user/profile/update/autocomplete/city/state-country',
-   authController.decodeReq,
-   autoCompleteController.reqStateCountry,
-   catchErrors(userController.updateStateCountryByCity)
+    authController.decodeReq,
+    autoCompleteController.reqStateCountry,
+    catchErrors(userController.updateStateCountryByCity)
 );
 
 // Autocomplete Cities/States/Countries from state
 router.post('/user/profile/update/autocomplete/state/country',
-   authController.decodeReq,
-   autoCompleteController.reqCountryFromState,
-   catchErrors(userController.updateCountryByState)
+    authController.decodeReq,
+    autoCompleteController.reqCountryFromState,
+    catchErrors(userController.updateCountryByState)
 );
 
 // Autocomplete Country from phonecode
 router.post('/user/profile/update/autocomplete/country',
-   authController.decodeReq,
-   autoCompleteController.reqCountryFromPhonecode,
-   catchErrors(userController.updateCountry)
+    authController.decodeReq,
+    autoCompleteController.reqCountryFromPhonecode,
+    catchErrors(userController.updateCountry)
 );
 
 router.post('/user/profile/edit',
@@ -135,45 +139,45 @@ router.post('/user/profile/image',
 
 // ** POSTS **
 router.get('/posts',
-   catchErrors(postController.getAllPost)
+    catchErrors(postController.getAllPost)
 );
 
 router.post('/posts/post/new',
-   authController.decodeAdminReq,
-   validateController.reqValidateNewPost,
-   catchErrors(postController.createPost)       
+    authController.decodeAdminReq,
+    validateController.reqValidateNewPost,
+    catchErrors(postController.createPost)
 );
 
 router.get('/posts/categories',
-   catchErrors(postController.getCategories)
+    catchErrors(postController.getCategories)
 );
 
 router.get('/posts/tags',
-   catchErrors(postController.getTags)
+    catchErrors(postController.getTags)
 );
 
-router.post('/posts/post/image/upload', 
-   imageController.uploadSingle,
-   imageController.resize
+router.post('/posts/post/image/upload',
+    imageController.uploadSingle,
+    imageController.resize
 );
 
 // ** POST **
 router.post('/posts/post',
-   authController.decodeAdminReq,
-   catchErrors(postController.getPost)
+    authController.decodeAdminReq,
+    catchErrors(postController.getPost)
 );
 
 router.post('/posts/post/comment/new',
-   authController.decodeAdminReq,
-   validateController.reqValidateNewComment,
-   catchErrors(postController.newComment),
-   catchErrors(postController.updatePost)
+    authController.decodeAdminReq,
+    validateController.reqValidateNewComment,
+    catchErrors(postController.newComment),
+    catchErrors(postController.updatePost)
 );
 
 router.post('/posts/post/update',
-   authController.decodeAdminReq,
-   validateController.reqValidateNewPost,
-   catchErrors(postController.updateAPost)
+    authController.decodeAdminReq,
+    validateController.reqValidateNewPost,
+    catchErrors(postController.updateAPost)
 );
 
 
@@ -184,5 +188,3 @@ router.post('/posts/post/update',
 
 
 module.exports = router;
-
-
